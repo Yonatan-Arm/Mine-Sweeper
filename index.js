@@ -13,13 +13,13 @@ var gLevel = {
 function level(level){
   if(level.innerText === 'easy'){
     gLevel.SIZE=4
+    gLevel.MINES=2
   } else if(level.innerText === 'hard'){
     gLevel.SIZE=8
     gLevel.MINES=12
   }else{
     gLevel.SIZE=12
     gLevel.MINES=30
-
   }
   initGame()
 }
