@@ -1,50 +1,120 @@
 body {
-    background-color: black;
-    color:white;
-    margin:auto;
-    text-align:center;
-  }
+  background-image: url(backgrong.jpeg);
+  color: rgb(8, 8, 8);
+  margin: auto;
+  text-align: center;
+  background-size: cover;
+  display: block;
+}
+h1{
+  border: 5px solid black;
+  border-radius: 20%;
+  width: 150px;
+  margin: auto;
+display: block;
+margin-bottom: 10px;
+} 
+h2{
+  border: 5px solid black;
+width: 150px;
+margin: 10px;
+display: inline-block;
+
+}
 
 .board-container {
-    background-color:#270082; 
-    background-size: contain;
-    box-shadow: 0 1px 5px #CCC;
-    border-radius: 5px; 
-    height: 450px;
-    width: 450px;
-    margin: auto;
-    position: relative;
-  }
-  .cell {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    color: rgb(216, 27, 27);
-    text-shadow: 0 1px 1px;
-    text-align: center;
-    font-size: 1.5em;
-  }
- .counter {
-    margin:auto;
-    color: white;
-    font: 2em sans-serif;
-  }
-  .counter-flag {
-    margin:auto;
-    color: white;
-    font: 2em sans-serif;
-    display: block;
-  }
+  background-color: #92A9BD;
+  margin-left: 35%;
+  box-shadow: 0 1px 5px #ccc;
+  max-height: 500px;
+  max-width: 450px;
+  display: block;
+  position: fixed;
+}
+.table{
+position: sticky;
+background-position: cover;
+padding: 20px 10px 10px;
+justify-content: center;
+margin-top:30px
 
-  .modal {
+}
+.emoji{
+  position: absolute;
+  z-index: 1;
+  display: block;
+  cursor: pointer;
+  left: 40%;
+  float: left;
+
+}
+.cell {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  color: rgb(216, 27, 27);
+  text-shadow: 0 1px 1px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.counter {
+  color: rgb(14, 13, 13);
+  font: 1.5em cursive;
+  border: 5px solid black;
+  width: 150px;
+  margin: 10px;
+  display: inline-block;
+  
+}
+.timer {
+  z-index: 1;
+  font-family: cursive;
+    padding: 5px; 
+    background: #1d81af;
+    color: white;
+    width: 50px;
+    display: block;
     position: absolute;
-background-color: yellow;
-color: black;
-font-size: 1em;
-height: 50px;
-width: 100px;
-display: none;
-  }
+    left: 35%;
+
+}
+
+.counter-flag {
+  color: rgb(14, 12, 12);
+  font: 1em cursive;
+  border: 4px solid black;
+  width: 150px;
+  height: 30px;
+  display: revert;
+  
+}
+
+.modal {
+  position: absolute;
+  background-color: #66CCFF;
+  color: black;
+  font-size: 1.2em;
+  height: 70px;
+  width: 100px;
+  display: none;
+  transition: 2s;
+
+  box-shadow: 5px 5px 5px 0px #000000, 
+  inset 4px 4px 15px 0px #000000, 0px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 0px 5px 15px 5px rgba(0,0,0,0);
+
+  margin: 150px  20px;
+}
+.hints {
+  width: 70px;
+  height: 30px;
+  border: 2px solid #111;
+  border-radius: 10%;
+  display: block;
+    position: absolute;
+    left: 42%;
+}
 
 .button-56 {
   align-items: center;
@@ -55,7 +125,7 @@ display: none;
   color: #111;
   cursor: pointer;
   display: inline;
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   font-size: 16px;
   height: 48px;
   justify-content: center;
@@ -81,10 +151,9 @@ display: none;
   position: absolute;
   top: -2px;
   transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
+  transition: transform 0.2s ease-out;
   z-index: -1;
 }
-
 
 .button-56:active {
   background-color: #ffdeda;
@@ -94,4 +163,3 @@ display: none;
 .button-56:hover {
   outline: 0;
 }
-

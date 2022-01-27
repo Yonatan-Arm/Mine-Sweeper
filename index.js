@@ -1,15 +1,25 @@
 "use strict";
 
-var lives = 3;
+var lives = ['❤','❤','❤']
 const Boomb = "🔥";
 var gboard;
 var count = 0;
 const FLAG = "🚩";
+const HAPPY = "🙂";
+const SAD = "🤕";
+var HINTS=['💡','💡','💡']
 var countFlag = 0;
 var gLevel = {
   SIZE: 4,
   MINES: 2,
 };
+
+var isGameOn;
+var gStartTime;
+var gWatchInterval;
+var emoji = document.querySelector(".emoji");
+var hint = document.querySelector('.hints');
+var live = document.querySelector("h2");
 
 function level(level) {
   if (level.innerText === "easy") {
@@ -18,51 +28,66 @@ function level(level) {
   } else if (level.innerText === "hard") {
     gLevel.SIZE = 8;
     gLevel.MINES = 12;
-  } else {
+  } else if(level.innerText === "expert") {
     gLevel.SIZE = 12;
     gLevel.MINES = 30;
   }
-  restart();
+  restart()
 }
 
 function initGame() {
-  lives = 3;
-  count = 0;
+  emoji.innerText = HAPPY;
+  hint.innerText = HINTS
+  isGameOn= 'ON'
   gboard = buildBoard(gLevel.SIZE);
-  createBoomb(gboard, gLevel.MINES);
   printMat(gboard, ".board-container");
-}
-
-function createBoomb(gboard, quntity) {
-  var cells = checkCells(gboard);
-  while (quntity > 0) {
-    var rendomIdx = getRandomIntInt(0, cells.length);
-    var boombIdx = cells[rendomIdx];
-    gboard[boombIdx.i][boombIdx.j].isMine = true;
-    quntity--;
-    console.log(boombIdx.i, boombIdx.j);
-  }
+  live.innerText= 'lives :'+ lives ;
 }
 
 function cellClicked(elCell, cellI, cellJ) {
-  gboard[cellI][cellJ].isShown = true;
-  // console.log('elCell', elCell)
-  if (gboard[cellI][cellJ].isMine === true) {
+  if (isGameOn === false) return;
+  if (isGameOn === 'ON') {
+    isGameOn = true;
+    startStopWatch();
+    createBoomb(gLevel.MINES);
+  }
+  var currCell = gboard[cellI][cellJ];
+  if (currCell.isShown === true) return;
+  if (currCell.isMine === false) {
+    count++;
+    var counter = document.querySelector(".counter");
+    counter.innerText = "count:" + count;
+    elCell.style.backgroundColor = "grey";
+    elCell.innerText = "";
+    currCell.isShown = true;
+    expandShown(gboard, cellI, cellJ);
+    emoji.innerText = HAPPY;
+    checkGameOver();
+  } else {
     // Update the Model:
-    gboard[cellI][cellJ] = Boomb;
+    currCell.isShown = true;
     // Update the Dom:
     elCell.innerText = Boomb;
-    lives--;
-
+    emoji.innerText = SAD;
+    lives.pop()
     checkGameOver();
-    var live = document.querySelector("h2");
     live.innerText = "lives:" + lives;
-  } else {
-    elCell.innerText = gboard[cellI][cellJ].minesAroundCount;
-    expandShown(gboard, cellI, cellJ);
-    var counter = document.querySelector(".counter");
-    count++;
-    counter.innerText = "count:" + count;
+  }
+}
+
+function createBoomb(quntity) {
+  var cells = checkFreeCells(gboard);
+  var posBoombs = [];
+  while (quntity > 0) {
+    var rendomIdx = getRandomIntInt(0, cells.length);
+    var boombIdx = cells[rendomIdx];
+    if (posBoombs.includes(boombIdx)) {
+      continue;
+    } else {
+      gboard[boombIdx.i][boombIdx.j].isMine = true;
+      posBoombs.push(boombIdx);
+      quntity--
+    }
   }
 }
 
@@ -73,8 +98,9 @@ function expandShown(mat, rowIdx, colIdx) {
       if (j < 0 || j > mat[0].length - 1) continue;
       if (i === rowIdx && j === colIdx) continue;
       var currCell = mat[i][j];
-      if (currCell.isMine === false) {
+      if (currCell.isMine === false && currCell.isShown === false) {
         currCell.isShown = true;
+        currCell.minesAroundCount = countBoombsAround(mat, i, j);
         renderCell({ i: i, j: j }, currCell.minesAroundCount);
         currCell.innerText = currCell.minesAroundCount;
       }
@@ -85,16 +111,22 @@ function expandShown(mat, rowIdx, colIdx) {
 
 function checkGameOver() {
   var popModal = document.querySelector(".modal");
-  if (lives === 0) {
-    popModal.style.display = "inline";
+  var closedCell= checkFreeCells(gboard)
+  if (lives.length === 0) {
+    popModal.style.display = "inline-block";
     popModal.innerText = "try better next time loser";
-  } else if (countFlag === gLevel.MINES) {
-    popModal.style.display = "inline";
+    endStopWatch();
+    isGameOn = false;
+  } else if (countFlag === gLevel.MINES || closedCell.length=== 0) {
+    popModal.style.display = "inline-block";
     popModal.innerText = "you are the winner";
+    endStopWatch();
+    isGameOn = false;
   }
 }
 
 function rightButton(cell, i, j) {
+  if (gboard[i][j].isShown === true) return;
   if (gboard[i][j].isMine === true) {
     var counterFlag = document.querySelector(".counter-flag");
     countFlag++;
@@ -105,14 +137,47 @@ function rightButton(cell, i, j) {
 }
 
 function restart() {
-  lives = 3;
+  lives = ['❤','❤','❤'];
   count = 0;
-  countFlag=0;
+  countFlag = 0;
+  isGameOn = 'ON';
+  HINTS=['💡','💡','💡']
+  endStopWatch();
+  var live = document.querySelector("h2");
+  live.innerText = "lives:" + lives;
   var counter = document.querySelector(".counter");
   counter.innerText = "count:" + count;
   var counterFlag = document.querySelector(".counter-flag");
   counterFlag.innerText = "counter flags: " + countFlag;
   var popModal = document.querySelector(".modal");
   popModal.style.display = "none";
-  initGame();
+  var elTime = document.querySelector(".timer");
+  elTime.innerText = "timer: ";
+  initGame()
+}
+ 
+function startStopWatch() {
+  gWatchInterval = setInterval(updateWatch, 1);
+  gStartTime = Date.now();
+}
+
+function updateWatch() {
+  var now = Date.now();
+  var time = ((now - gStartTime) / 1000).toFixed(3);
+  var elTime = document.querySelector(".timer");
+  elTime.innerText = time;
+}
+
+function endStopWatch() {
+  clearInterval(gWatchInterval);
+  updateWatch();
+}
+
+function openHints(){
+  var freeCells= checkFreeCells(gboard)
+  var rendomIdx = getRandomIntInt(0, freeCells.length);
+  var hintIdx = freeCells[rendomIdx];
+  var currcell=gboard[hintIdx.i][hintIdx.j]
+HINTS.pop()
+hint.innerText= HINTS
 }

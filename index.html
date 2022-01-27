@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body onload="initGame()">
-    <h1> mine sprint </h1>
-    <h2> lives: 3 </h2>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body onload="initGame()" oncontextmenu="return false">
+    <h1>mine sprint</h1>
     <div class="levels">
-<button  class="button-56" role="button" onclick="level(this)">easy</button>
-<button class="button-56" role="button"  onclick="level(this)" >hard</button>
-<button  class="button-56" role="button" onclick="level(this)">expert</button>
+        <button class="button-56" role="button" onclick="level(this)">
+            easy
+        </button>
+        <button class="button-56" role="button" onclick="level(this)">
+            hard
+        </button>
+        <button class="button-56" role="button" onclick="level(this)">
+            expert
+        </button>
     </div>
-
+    <h2></h2>
     <span class="counter"> count </span>
     <span class="counter-flag"> count flags: </span>
-    <div class="board-container"> </div>
-    <div class="modal"> </div>
-    
-    
+    <span class="timer"> timer: </span>
+    <div class="board-container">
+    </div>
+    <button class="hints" onclick="openHints()"> </button>
+    <span class="emoji" onclick="restart()"> </span> 
+    <div class="modal"></div>
+
     <script src="util.js"></script>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
