@@ -47,8 +47,8 @@ function countBoombsAround(mat, rowIdx, colIdx) {
       if (j < 0 || j > mat[0].length - 1) continue;
       if (i === rowIdx && j === colIdx) continue;
       if (mat[i][j].isMine === true) {
-		  countBoombs++
-	  }
+        countBoombs++;
+      }
     }
   }
   return countBoombs;
@@ -57,14 +57,19 @@ function countBoombsAround(mat, rowIdx, colIdx) {
 function renderCell(location, value) {
   // Select the elCell and set the value
   var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-  elCell.innerHTML = value;
+  if (value === 0) {
+    elCell.innerHTML = "";
+    elCell.style.backgroundColor = "grey";
+  } else {
+    elCell.innerHTML = value;
+  }
 }
 
 function checkCells(gboard) {
   var arr = [];
   for (var i = 0; i < gboard.length; i++) {
     for (var j = 0; j < gboard[i].length; j++) {
-      arr.push({i :i, j: j });
+      arr.push({ i: i, j: j });
     }
   }
   return arr;
@@ -74,14 +79,13 @@ function checkFreeCells(gboard) {
   var arr = [];
   for (var i = 0; i < gboard.length; i++) {
     for (var j = 0; j < gboard[i].length; j++) {
-      if(gboard[i][j].isShown===false && gboard[i][j].isMine === false){
-        arr.push({i :i, j: j });
+      if (gboard[i][j].isShown === false && gboard[i][j].isMine === false) {
+        arr.push({ i: i, j: j });
       }
     }
   }
   return arr;
 }
-
 
 function getRandomIntInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

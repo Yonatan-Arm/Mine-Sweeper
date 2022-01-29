@@ -10,25 +10,25 @@
   <body onload="initGame()" oncontextmenu="return false">
     <h1>mine sprint</h1>
     <div class="levels">
-        <button class="button-56" role="button" onclick="level(this)">
-            easy
-        </button>
-        <button class="button-56" role="button" onclick="level(this)">
-            hard
-        </button>
-        <button class="button-56" role="button" onclick="level(this)">
-            expert
-        </button>
+      <button class="button-56" role="button" onclick="levelGame(this)">
+        easy
+      </button>
+      <button class="button-56" role="button" onclick="levelGame(this)">
+        hard
+      </button>
+      <button class="button-56" role="button" onclick="levelGame(this)">
+        expert
+      </button>
     </div>
     <h2></h2>
     <span class="counter"> count </span>
     <span class="counter-flag"> count flags: </span>
     <span class="timer"> timer: </span>
-    <div class="board-container">
-    </div>
-    <button class="hints" onclick="openHints()"> </button>
-    <span class="emoji" onclick="restart()"> </span> 
+    <div class="board-container"></div>
+    <button class="hints" onclick="openHints()"></button>
+    <span class="emoji" onclick="restart()"> </span>
     <div class="modal"></div>
+    <p class="modal-winner"></p>
 
     <script src="util.js"></script>
     <script src="index.js"></script>

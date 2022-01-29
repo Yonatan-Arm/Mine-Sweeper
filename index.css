@@ -1,5 +1,5 @@
 body {
-  background-image: url(backgrong.jpeg);
+  background-image: url(back.jpeg);
   color: rgb(8, 8, 8);
   margin: auto;
   text-align: center;
@@ -8,6 +8,7 @@ body {
 }
 h1{
   border: 5px solid black;
+  background-color: #F5F7B2;
   border-radius: 20%;
   width: 150px;
   margin: auto;
@@ -15,15 +16,18 @@ display: block;
 margin-bottom: 10px;
 } 
 h2{
+  background-color: #F5F7B2;
   border: 5px solid black;
-width: 150px;
-margin: 10px;
-display: inline-block;
-
+  width: 150px;
+  margin: 10px;
+  display: inline-block;
+  
 }
 
+
 .board-container {
-  background-color: #92A9BD;
+  /* background-color: #92A9BD; */
+  background-color: #443737;
   margin-left: 35%;
   box-shadow: 0 1px 5px #ccc;
   max-height: 500px;
@@ -52,13 +56,14 @@ margin-top:30px
   position: relative;
   width: 30px;
   height: 30px;
-  color: rgb(216, 27, 27);
+  color:#FF0000;
   text-shadow: 0 1px 1px;
   text-align: center;
   font-size: 1.5em;
   cursor: pointer;
 }
 .counter {
+  background-color: #F5F7B2;
   color: rgb(14, 13, 13);
   font: 1.5em cursive;
   border: 5px solid black;
@@ -81,6 +86,7 @@ margin-top:30px
 }
 
 .counter-flag {
+  background-color: #F5F7B2;
   color: rgb(14, 12, 12);
   font: 1em cursive;
   border: 4px solid black;
@@ -92,20 +98,36 @@ margin-top:30px
 
 .modal {
   position: absolute;
-  background-color: #66CCFF;
+  background-color:#F9FF21;
   color: black;
-  font-size: 1.2em;
-  height: 70px;
-  width: 100px;
+  text-align: center;
+  padding: 7px;
+  font-size: 1.5em;
+  height: 100px;
+  width: 120px;
   display: none;
   transition: 2s;
 
-  box-shadow: 5px 5px 5px 0px #000000, 
-  inset 4px 4px 15px 0px #000000, 0px 5px 15px 5px rgba(0,0,0,0); 
-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 0px 5px 15px 5px rgba(0,0,0,0);
+  box-shadow: 5px 5px 5px 0px #FF0000, 
+  inset 4px 4px 15px 0px #FF0000, 0px 5px 15px 5px #FF0000; 
+box-shadow: 5px 5px 5px 0px #FF0000, inset 4px 4px 15px 0px #FF0000, 0px 5px 15px 5px #FF0000;
 
   margin: 150px  20px;
 }
+.modal-winner {
+  border: 1px solid black;
+  background-color:#8921ff;
+  color: black;
+  text-align: center;
+  padding: 7px;
+  font-size: 1.5em;
+  height: 200px;
+  width: 150px;
+ margin-right: 80px;
+ display: none;
+ z-index: 1; 
+}
+
 .hints {
   width: 70px;
   height: 30px;
@@ -160,6 +182,4 @@ box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 0px 5px 15p
   outline: 0;
 }
 
-.button-56:hover {
-  outline: 0;
-}
+
